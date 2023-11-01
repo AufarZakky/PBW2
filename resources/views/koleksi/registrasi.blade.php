@@ -4,8 +4,9 @@
             {{ __('Tambah Koleksi') }}
         </h2>
     </x-slot>
-
-    <div class="py-12"> 
+<!-- Aufar Hadni Azzakky || 6706223109 || 46-03 -->
+@section('content')
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -14,7 +15,6 @@
                     {{ Session::get('success') }}
                 </div>
                 @endif
-                    <!-- Formulir Penambahan Koleksi -->
                     <form action="{{ route('koleksi.store') }}" method="POST">
                         @csrf
                         <!-- Nama Koleksi -->
@@ -24,10 +24,16 @@
                         </div>
 
                         <!-- Jenis Koleksi -->
-                        <div class="mb-4">
-                            <label for="jenisKoleksi" class="block text-sm font-medium text-gray-600">Jenis Koleksi</label>
-                            <input type="number" name="jenisKoleksi" id="jenisKoleksi" class="mt-1 p-2 border rounded-md w-full" required>
-                        </div>
+                        <div class="mt-4">
+                            <x-input-label for="jenisKoleksi" :value="__('Jenis Koleksi')" />
+                            <select id="jenisKoleksi" name="jenisKoleksi" class="block mt-1 w-full" required autofocus>
+                                <option value="{{ old('jenisKoleksi') == '' ? '' : old('jenisKoleksi') }}" {{ old('jenisKoleksi') == '' ? 'selected' : '' }}>{{ old('jenisKoleksi') == '' ? 'Select one...' :  (old('jenisKoleksi') == 1 ? 'Buku (Selected)' : (old('jenisKoleksi') == 2 ? 'Majalah (Selected)' : 'Cakram Digital (Selected)')) }}</option>
+                                <option value="1">Buku</option>
+                                <option value="2">Majalah</option>
+                                <option value="3">Cakram Digital</option>
+                            </select>
+                            <x-input-error :messages="$errors->get('jenisKoleksi')" class="mt-2" />
+                        </div><br>
 
                         <!-- Jumlah Koleksi -->
                         <div class="mb-4">
@@ -50,4 +56,5 @@
             window.history.back();
         }
     </script>
+@endsection
 </x-app-layout>

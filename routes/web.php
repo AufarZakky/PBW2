@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CollectionController;
-use GuzzleHttp\Promise\Create;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +15,6 @@ use GuzzleHttp\Promise\Create;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-
-Aufar Hadni Azzakky
-6706223109 - 4603
 */
 
 Route::get('/', function () {
@@ -29,6 +25,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+ 
     Route::post('/userStore', [RegisteredUserController::class, 'store'])->name('user.store');
     Route::get('/user', [UserController::class, 'index'])->name('user.daftarPengguna');
     Route::get('/userRegistration', [UserController::class, 'create'])->name('user.registrasi');
@@ -37,12 +38,10 @@ Route::get('/dashboard', function () {
     Route::post('/koleksiStore', [CollectionController::class, 'store'])->name('koleksi.store');
     Route::get('/koleksi', [CollectionController::class, 'index'])->name('koleksi.daftarKoleksi');
     Route::get('/koleksiTambah', [CollectionController::class, 'create'])->name('koleksi.registrasi');
-    Route::get('/koleksiView/{collection}', [CollectionController::class, 'show'])->name('koleksi.infoKoleksi');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/koleksiView/{id}', [CollectionController::class, 'show'])->name('koleksi.infoKoleksi');
 });
 
 require __DIR__.'/auth.php';
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

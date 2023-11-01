@@ -4,7 +4,8 @@
             {{ __('Tambah User') }}
         </h2>
     </x-slot>
-
+    <!--Aufar Hadni Azzakky || 6706223109 || 46-03 -->
+    @section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -17,7 +18,7 @@
                     <!-- Formulir Penambahan Koleksi -->
                     <form action="{{ route('user.store') }}" method="POST">
                         @csrf
-                        <!-- Username Aufar Hadni Azzakky 46-03 6706223109-->
+                        <!-- Username -->
                     <div>
                         <x-input-label for="username" :value="__('Username')" />
                         <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
@@ -97,7 +98,7 @@
                         <x-input-error :messages="$errors->get('religion')" class="mt-2" />
                     </div>
 
-                    <!-- Gender Aufar Hadni Azzakky 46-03 6706223109-->
+                    <!-- Gender -->
                     <div class="mt-4">
                         <x-input-label for="gender" :value="__('Gender')" />
                         <select id="gender" name="gender" class="block mt-1 w-full" required autofocus>
@@ -123,4 +124,5 @@
             window.history.back();
         }
     </script>
+@endsection
 </x-app-layout>

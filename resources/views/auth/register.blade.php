@@ -1,17 +1,19 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
-
-        <!-- Username //Aufar Hadni Azzakky 46-03 6706223109  -->
+<!-- * Nama     : Aufar hadni Azzakky
+     * NIM      : 67062230109
+     * Kelas    : 4603 -->
+        <!-- Username -->
         <div>
             <x-input-label for="username" :value="__('Username')" />
             <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
-         
-        <!-- Fullname -->
+        
+        <!-- Full Name -->
         <div>
-            <x-input-label for="fullname" :value="__('Fullname')" />
+            <x-input-label for="fullname" :value="__('Full Name')" />
             <x-text-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" :value="old('fullname')" required autofocus autocomplete="fullname" />
             <x-input-error :messages="$errors->get('fullname')" class="mt-2" />
         </div>
@@ -46,44 +48,55 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <!-- Alamat -->
-        <div>
-            <x-input-label for="address" :value="__('Alamat')" />
+        <!-- Address -->
+        <div class="mt-4">
+            <x-input-label for="address" :value="__('Address')" />
             <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autofocus autocomplete="address" />
             <x-input-error :messages="$errors->get('address')" class="mt-2" />
         </div>
 
-        <!-- Tanggal lahir -->
-        <div>
-            <x-input-label for="birthdate" :value="__('Tanggal lahir')" />
+        <!-- Birthdate -->
+        <div class="mt-4">
+            <x-input-label for="birthdate" :value="__('Birthdate')" />
             <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" :value="old('birthdate')" required autofocus autocomplete="birthdate" />
             <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
-        </div>
+        </div>
 
-        <!-- phonenumber -->
-        <div>
-            <x-input-label for="phonenumber" :value="__('Nomer Telepon')" />
+        <!-- Phone Number -->
+        <div class="mt-4">
+            <x-input-label for="phonenumber" :value="__('Phone Number')" />
             <x-text-input id="phonenumber" class="block mt-1 w-full" type="number" name="phonenumber" :value="old('phonenumber')" required autofocus autocomplete="phonenumber" />
             <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" />
         </div>
 
-        <!-- Agama  //Muhamad Hudansah-6706223049-46-03-->
-        <div>
-            <x-input-label for="religion" :value="__('Agama')" />
-            <x-text-input id="religion" class="block mt-1 w-full" type="text" name="religion" :value="old('religion')" required autofocus autocomplete="religion" />
+        <!-- Religion -->
+        <div class="mt-4">
+            <x-input-label for="religion" :value="__('Religion')" />
+            <select id="religion" name="religion" class="block mt-1 w-full" required autofocus>
+                <option value="{{ old('religion') == '' ? '' : old('religion') }}" {{ old('religion') == '' ? 'selected' : '' }}>{{ old('religion') == '' ? 'Select one...' : old('religion').' (Selected)' }}</option>
+                <option value="Islam">Islam</option>
+                <option value="Kristen">Kristen</option>
+                <option value="Katolik">Katolik</option>
+                <option value="Hindu">Hindu</option>
+                <option value="Buddha">Buddha</option>
+                <option value="Khonghucu">Khonghucu</option>
+            </select>
             <x-input-error :messages="$errors->get('religion')" class="mt-2" />
         </div>
 
-        <!-- Jenis Kelamin -->
-        <div>
-            <x-input-label for="gender" :value="__('Jenis Kelamin')" />
-            <x-text-input id="gender" class="block mt-1 w-full" type="text" name="gender" :value="old('gender')" required autofocus autocomplete="gender" />
+        <!-- Gender -->
+        <div class="mt-4">
+            <x-input-label for="gender" :value="__('Gender')" />
+            <select id="gender" name="gender" class="block mt-1 w-full" required autofocus>
+                <option value="{{ old('gender') == '' ? '' : old('gender') }}" {{ old('gender') == '' ? 'selected' : '' }}>{{ old('gender') == '' ? 'Select one...' : (old('gender') == 1 ? 'Laki-Laki (Selected)' : 'Perempuan (Selected)') }}</option>
+                <option value="1">Laki-Laki</option>
+                <option value="0">Perempuan</option>
+            </select>
             <x-input-error :messages="$errors->get('gender')" class="mt-2" />
         </div>
 
-
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 

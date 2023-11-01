@@ -4,12 +4,13 @@
             {{ __('Informasi Pengguna') }}
         </h2>
     </x-slot>
-
-    <div class="py-12"> 
+     <!--Aufar Hadni Azzakky || 6706223109 || 46-03 -->
+    @section('content')
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <a href="http://localhost/pbw2/public" class="btn btn-dark" onclick="goBack()">Back</a><br><br>
+                    <a href="#" class="btn btn-dark" onclick="goBack()">Back</a><br><br>
                     <p>Full Name: {{ $user->fullname }}</p>
                     <p>Username: {{ $user->username }}</p>
                     <p>Phone Number: {{ $user->phoneNumber }}</p>
@@ -28,4 +29,5 @@
             window.history.back();
         }
     </script>
+@endsection
 </x-app-layout>

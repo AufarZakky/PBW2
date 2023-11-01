@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisteredUserController extends Controller
 {
@@ -25,7 +27,9 @@ class RegisteredUserController extends Controller
 
     /**
      * Handle an incoming registration request.
-     *
+     * Nama     : Aufar Hadni Azzakky
+     * NIM      : 6706223003
+     * Kelas    : 4603
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
@@ -33,13 +37,14 @@ class RegisteredUserController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:100'],
             'fullname' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'address' => ['required', 'string', 'max:1000'],
+            'address' => ['required', 'string', 'max:100'],
             'birthdate' => ['required', 'date'],
             'phonenumber' => ['required', 'string', 'max:20'],
             'religion' => ['required', 'string', 'max:20'],
-            'gender' => ['required', 'string', 'max:40'],
+            'gender' => ['required', 'integer', 'min:0', 'max:1'],
+            // 0 male, 1 female
         ]);
 
         $user = User::create([
@@ -56,8 +61,12 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        // Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        if (url()->current() == route('register')) {
+            Auth::login($user);
+            return redirect(RouteServiceProvider::HOME);
+        } else {
+            Session::flash('success', 'User berhasil ditambahkan!');
+            return redirect()->route('user.registrasi');
+        }
     }
 }

@@ -16,8 +16,8 @@ return new class extends Migration
             //
             $table->id();
             $table->string('namaKoleksi', 1000);
-            $table->tinyInteger('jenisKoleksi');
-            $table->string('jumlahKoleksi');
+            $table->string('jenisKoleksi');
+            $table->tinyInteger('jumlahKoleksi');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
